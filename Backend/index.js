@@ -15,8 +15,9 @@ app.listen(port);
 console.log('Listening on port',port);
 
 AWS.config.update({region: 'region',
-accessKeyId: 'access key',
+accessKeyId: 'accesskey',
 secretAccessKey: 'secret key' });
+var ddb = new AWS.DynamoDB();
 
 app.post('/registrar', function (req, res){
   user = req.body.user;
@@ -24,11 +25,11 @@ app.post('/registrar', function (req, res){
   name = req.body.name;
   email = req.body.email;
   //Insertar un registro
-  var ddb = new AWS.DynamoDB();
+
   var params = {
     TableName: 'finalsopes',
     Item: {
-      'usuario' : {S: ""+user},
+      'id_usuario' : {S: ""+user},
       'nombre' : {S: "" + name},
       'email': {S: ""+email},
       'password': {S: ""+pass},
@@ -37,6 +38,7 @@ app.post('/registrar', function (req, res){
   
   ddb.putItem(params, function(err, data) {
     if (err) {
+      console.log(err)
       res.json({ mensaje: "No se pudo insertar el usuario" })
     } else {
       res.json({ mensaje: "Se inserto el usuario" })
@@ -46,9 +48,11 @@ app.post('/registrar', function (req, res){
 
 
 app.post('/login', (req, res) => {
-  let usuario = req.body.usuario;
+  let usuario = req.body.user;
   let pass = req.body.password;
+  let email =req.body.email;
   let log = false;
+
   ddb.scan({
     TableName: "finalsopes"
   }, function (err, data) {
@@ -57,7 +61,7 @@ app.post('/login', (req, res) => {
       res.send({ 'message': 'ddb failed' });
     } else {
       for (const item of data.Items) {
-        if (item.usuario.S == usuario && item.pass.S == pass) {
+        if ((item.id_usuario.S == usuario && item.password.S == pass) || item.email.S == email && item.password.S == pass) {
           log = true; 
           break;
         }     
