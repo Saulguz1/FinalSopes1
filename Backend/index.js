@@ -74,3 +74,7 @@ app.post('/login', (req, res) => {
     }
   });
 })
+
+app.get('/PruebaBalance', (req, res) => {
+  res.json({servidor: "Hola se hizo peticion en el Servidor 1"})
+})
