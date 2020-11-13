@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var AWS = require('aws-sdk');
 const cors = require('cors');
 const uuid = require('uuid');
-
+var md5 = require('md5');
 var app = express();
 var corsOptions ={origin: true, optionsSuccessStatus: 200 };
 app.use(cors(corsOptions));
@@ -15,8 +15,8 @@ app.listen(port);
 console.log('Listening on port',port);
 
 AWS.config.update({region: 'region',
-accessKeyId: 'accesskey',
-secretAccessKey: 'secret key' });
+accessKeyId: 'access',
+secretAccessKey: 'secret' });
 var ddb = new AWS.DynamoDB();
 
 app.post('/registrar', function (req, res){
@@ -25,7 +25,7 @@ app.post('/registrar', function (req, res){
   name = req.body.name;
   email = req.body.email;
   //Insertar un registro
-
+ pass= md5(pass);
   var params = {
     TableName: 'finalsopes',
     Item: {
@@ -39,9 +39,9 @@ app.post('/registrar', function (req, res){
   ddb.putItem(params, function(err, data) {
     if (err) {
       console.log(err)
-      res.json({ mensaje: "No se pudo insertar el usuario" })
+      res.json({ mensaje: 0 })
     } else {
-      res.json({ mensaje: "Se inserto el usuario" })
+      res.json({ mensaje: 1 })
     }
   });
 });
@@ -49,27 +49,28 @@ app.post('/registrar', function (req, res){
 
 app.post('/login', (req, res) => {
   let usuario = req.body.user;
-  let pass = req.body.password;
+  var pass = req.body.password;
   let email =req.body.email;
   let log = false;
-
+  pass= md5(pass);
   ddb.scan({
     TableName: "finalsopes"
   }, function (err, data) {
     if (err) {
       console.log('Error saving data:', err);
-      res.send({ 'message': 'ddb failed' });
+      res.json([]);
     } else {
       for (const item of data.Items) {
         if ((item.id_usuario.S == usuario && item.password.S == pass) || item.email.S == email && item.password.S == pass) {
           log = true; 
+          res.json(item);
           break;
         }     
       }
       if(log){
-        res.json({ mensaje: "Ok" , servidor: "1"})
+
       }else{
-        res.json({ mensaje: "Error", servidor: "1"})
+      res.json([]);
       }
     }
   });

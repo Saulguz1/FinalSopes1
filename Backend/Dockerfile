@@ -10,6 +10,7 @@ RUN npm install cors
 RUN npm install aws-sdk
 RUN npm install body-parser
 RUN npm install uuid
+RUN npm install md5
 
 COPY . .
 

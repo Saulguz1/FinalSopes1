@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  frontend:
+    container_name: frontend
+    build: ./Frontend
+    ports: 
+      - '80:80'
+    links: 
+      - apinode
+
+  apinode: 
+    container_name: apinode 
+    build: ./Backend
+    expose:
+      - "9000"
+    ports: 
+      - "9000:9000"

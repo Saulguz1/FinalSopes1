@@ -1,23 +1,9 @@
 <?php
 session_start();
-$_SESSION['username']= ' ';
-$_SESSION['id_user']= ' ';
-$_SESSION['modo']= ' ';
-$_SESSION['amigos']=[];
-$_SESSION['usuarios']=[];
-$_SESSION['noamigos']=[];
-$_SESSION['datosamigos']=[];
-$_SESSION['datoschatactual']=[];
-$_SESSION['msgchat']='';
-$_SESSION['numberchatbot']=0;
-$_SESSION['pais']='';
-$_SESSION['fechaini']='';
-$_SESSION['fechaf']='';
-$_SESSION['tipocaso']='';
-$_SESSION['labels']=[];
-$_SESSION['values']=[];
-$_SESSION['valuesr']=[];
-$_SESSION['valuesm']=[];
+$_SESSION['user']= ' ';
+$_SESSION['name']= ' ';
+$_SESSION['email']= ' ';
+$_SESSION['password']= ' ';
 include_once "outheader.php";
 ?>
 
@@ -38,6 +24,10 @@ include_once "outheader.php";
                                                         <label class="small mb-1" for="inputUser">Usuario</label>
                                                         <input class="form-control py-4" id="inputUser"  name="inputUser" placeholder="Ingresa tu usuario" />
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="inputemail">Email</label>
+                                                        <input class="form-control py-4" id="inputemail"  name="inputemail" placeholder="Ingresa tu correo" />
+                                                    </div>
                                                     <div class="form-row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
@@ -52,10 +42,7 @@ include_once "outheader.php";
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="inputimage">Seleccion de Imagen: </label>
-                                                        <input  type="file" id="inputimage" name="inputimage">                   
-                                                </div>
+                                                    
                                              <div class="form-group mt-4 mb-0">
                                              <button class="btn btn-primary btn-block" type="submit" name="submit" id="submit" value="Submit">Registrarse</button>
                                         </div>

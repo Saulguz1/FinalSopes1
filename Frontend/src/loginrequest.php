@@ -1,18 +1,19 @@
 <?php
 session_start();
-$url = 'http://apipython:5000/login';
-$url2 = 'http://apipython:5000/cambiarid';
+$url = 'http://apinode:9000/login';
 $user = '';
 $pass = '';
+$email = '';
 
 if (isset($_POST['inputUser'])) {
     $user = $_POST['inputUser'];
+    $email = $_POST['inputUser'];
 }
 if (isset($_POST['inputPassword'])) {
     $pass = $_POST['inputPassword'];
 }
 
-$data = array('user'=> $user,'password'=>$pass);
+$data = array('user'=> $user,'password'=>$pass,'email'=>$email);
 
 $ch = curl_init( $url );
 # Setup request to send json via POST.
@@ -28,13 +29,9 @@ curl_close($ch);
 $result=json_decode($result,true);
 
 if(sizeof($result) != 0){
-    $_SESSION['id_user']= $result[0]['_id']['$oid'];
-    $_SESSION['name']= $result[0]['nombre'];
-    $_SESSION['username']= $user;
-    $_SESSION['password']= $pass;
-    $_SESSION['imagenuser']= $result[0]['imagen'];
-    $_SESSION['modo'] = $result[0]['modo'];
-    $_SESSION['amigos']=$result[0]['amigos'];
+    $_SESSION['user']= $result['id_usuario']['S'];
+    $_SESSION['name']= $result['nombre']['S'];
+    $_SESSION['email']= $result['email']['S'];
    header("Location: editarperfil.php");
    exit;
     

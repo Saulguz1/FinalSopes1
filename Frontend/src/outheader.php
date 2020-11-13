@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>uSocial</title>
+    <title>Sopes1-Final</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <style>
     body {
-        background-image: url('https://i.pinimg.com/originals/03/34/a7/0334a7b02031c715c1b0f80d3cc9d47d.gif');
+        background-image: url('https://k60.kn3.net/taringa/5/1/3/2/4/4/vagonettas/AFD.gif');
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -24,7 +24,7 @@
 <body class="sb-nav-fixed">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         
-    <a class="navbar-brand" style="font-size:50px" href="index.php"><span style="font-family:Apple Chancery;font-weight: 900;font-size:50px;color:violet">u</span>Social</a>
+    <a class="navbar-brand" style="font-size:50px" href="index.php"><span style="font-family:Apple Chancery;font-weight: 900;font-size:50px;color:violet">Sopes1</span>-Final</a>
 
         <ul class="nav nav-pills justify-content-end ml-auto">
             <li class="nav-item">
