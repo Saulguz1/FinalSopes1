@@ -3,6 +3,7 @@ version: '3.7'
 services:
   frontend:
     container_name: frontend
+    image: saulguz1/frontfinalsopes
     build: ./Frontend
     ports: 
       - '80:80'
@@ -10,7 +11,8 @@ services:
       - apinode
 
   apinode: 
-    container_name: apinode 
+    container_name: apinode
+    image: saulguz1/backfinalsopes
     build: ./Backend
     expose:
       - "9000"
